@@ -1,0 +1,26 @@
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Data and model artifacts
+data/raw/*
+!data/raw/.gitkeep
+mlruns/
+models/*.joblib
+models/*.pkl
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Local environment
+.env
+
+#csv files
+*.csv
