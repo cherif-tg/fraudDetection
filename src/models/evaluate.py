@@ -30,3 +30,18 @@ def compute_metrics(y_true: np.ndarray, y_score: np.ndarray, threshold: float = 
 		f1=f1_score(y_true, y_pred, zero_division=0),
 	)
 
+
+def select_best_threshold(y_true: np.ndarray, y_score: np.ndarray) -> float:
+	"""Pick threshold maximizing F1 on validation scores."""
+	thresholds = np.unique(np.quantile(y_score, np.linspace(0.01, 0.99, 99)))
+	best_threshold = 0.5
+	best_f1 = -1.0
+
+	for th in thresholds:
+		metrics = compute_metrics(y_true=y_true, y_score=y_score, threshold=float(th))
+		if metrics.f1 > best_f1:
+			best_f1 = metrics.f1
+			best_threshold = float(th)
+
+	return best_threshold
+
